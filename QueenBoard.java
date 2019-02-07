@@ -2,7 +2,12 @@ public class QueenBoard{
   private int[][]board;
 
   public QueenBoard(int size){ //constructor
-
+    board = new int[size][size];
+    for (int r = 0; r < board.length; r++){
+      for (int c = 0; c < board[r].length; c++){
+        board[r][c] = 32;
+      }
+    }
   }
 
   private boolean addQueen(int r, int c){
@@ -17,7 +22,7 @@ public class QueenBoard{
   *@return The output string formatted as follows:
   *All numbers that represent queens are replaced with 'Q'
   *all others are displayed as underscores '_'
-  *There are spaces between each symbol:  
+  *There are spaces between each symbol:
   *"""_ _ Q _
   *Q _ _ _
 
@@ -27,7 +32,16 @@ public class QueenBoard{
   *(pythonic string notation for clarity,
   *excludes the character up to the *)
   */
-  public String toString(){}
+  public String toString(){
+    String Board = "";
+    for (int r = 0; r < board.length; r++){
+      for (int c = 0; c < board[r].length; c++){
+        Board += (char) board[r][c];
+      }
+      Board += '\n';
+    }
+    return Board;
+  }
 
 
 
