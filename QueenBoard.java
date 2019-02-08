@@ -5,17 +5,29 @@ public class QueenBoard{
     board = new int[size][size];
     for (int r = 0; r < board.length; r++){
       for (int c = 0; c < board[r].length; c++){
-        board[r][c] = 32;
+        board[r][c] = '_' + 0;
       }
     }
   }
 
   private boolean addQueen(int r, int c){
-
+    try{
+      board[r][c] = 'Q' + 0;
+      return true;
+    }
+    catch(IndexOutOfBoundsException e){
+      return false;
+    }
   }
 
   private boolean removeQueen(int r, int c){
-
+    try{
+      board[r][c] = '_' + 0;
+      return true;
+    }
+    catch(IndexOutOfBoundsException e){
+      return false;
+    }
   }
 
   /**
@@ -37,6 +49,7 @@ public class QueenBoard{
     for (int r = 0; r < board.length; r++){
       for (int c = 0; c < board[r].length; c++){
         Board += (char) board[r][c];
+        Board += ' ';
       }
       Board += '\n';
     }
@@ -53,13 +66,17 @@ public class QueenBoard{
   *@throws IllegalStateException when the board starts with any non-zero value
 
   */
-  public boolean solve(){}
+  public boolean solve(){
+    return true;
+  }
 
   /**
   *@return the number of solutions found, and leaves the board filled with only 0's
   *@throws IllegalStateException when the board starts with any non-zero value
   */
-  public int countSolutions(){}
+  public int countSolutions(){
+    return 0;
+  }
 
 
 }
