@@ -5,12 +5,12 @@ public class QueenBoard{
     board = new int[size][size];
     for (int r = 0; r < board.length; r++){
       for (int c = 0; c < board[r].length; c++){
-        board[r][c] = '_' + 0;
+        board[r][c] = 0;
       }
     }
   }
 
-  public boolean addQueen(int r, int c){ //public for testing
+/*  public boolean addQueen(int r, int c){ //public for testing
     try{
       //testing horizontal Queen
       for (int x = 0; x < board[r].length; x++){
@@ -60,10 +60,20 @@ public class QueenBoard{
       return false;
     }
   }
+  */
+
+  public boolean addQueen(int r, int c){
+    try{
+
+    }
+    catch(IndexOutOfBoundsException e){ //public for testing
+      return false;
+    }
+  }
 
   public boolean removeQueen(int r, int c){
     try{
-      board[r][c] = '_' + 0;
+      board[r][c] = 0;
       return true;
     }
     catch(IndexOutOfBoundsException e){
@@ -89,8 +99,14 @@ public class QueenBoard{
     String Board = "";
     for (int r = 0; r < board.length; r++){
       for (int c = 0; c < board[r].length; c++){
-        Board += (char) board[r][c];
-        Board += ' ';
+        if (board[r][c] != -1){
+          Board += '_';
+          Board += ' ';
+        }
+        else{
+          Board += 'Q';
+          Board += ' ';
+        }
       }
       Board += '\n';
     }
