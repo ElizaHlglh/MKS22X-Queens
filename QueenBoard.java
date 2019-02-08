@@ -108,6 +108,7 @@ public class QueenBoard{
 
   */
   public boolean solve(){
+    //use recursion here to add Q using different column for (int x)
     return true;
   }
 
