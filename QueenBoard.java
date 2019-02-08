@@ -39,7 +39,7 @@ public class QueenBoard{
       //testing horizontal (right to left down) Queen
       checkX = c;
       checkY = r;
-      while (checkX < board.length && checkY > 0){ //find the first top right grid for horizontal check
+      while (checkX < board.length-1 && checkY > 0){ //find the first top right grid for horizontal check
         checkX++;
         checkY--;
       }
