@@ -22,7 +22,7 @@ public class QueenBoard{
       //testing horizontal (left to right down) Queen
       int checkX = c;
       int checkY = r;
-      while (checkX > 0 && checkY > 0){ //find the first top grid for horizontal check
+      while (checkX > 0 && checkY > 0){ //find the first top left grid for horizontal check
         checkX--;
         checkY--;
       }
@@ -36,6 +36,23 @@ public class QueenBoard{
         }
       }
 
+      //testing horizontal (right to left down) Queen
+      checkX = c;
+      checkY = r;
+      while (checkX < board.length && checkY > 0){ //find the first top right grid for horizontal check
+        checkX++;
+        checkY--;
+      }
+      while (checkX > 0 && checkY < board.length){ //go down horizontally from the top right grid
+        if (board[checkY][checkX] == 'Q'){
+          return false;
+        }
+        else{ //move to next horizontal grid
+          checkX--;
+          checkY++;
+        }
+      }
+      //only add after passing the testings above
       board[r][c] = 'Q' + 0;
       return true;
     }
