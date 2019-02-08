@@ -14,7 +14,7 @@ public class QueenBoard{
     try{
       //testing horizontal Queen
       for (int x = 0; x < board[r].length; x++){
-        if (board[r][x] == 'Q'){
+        if (board[r][x] == 'Q' + 0){
           return false;
         }
       }
