@@ -130,14 +130,17 @@ public class QueenBoard{
     String Board = "";
     for (int r = 0; r < board.length; r++){
       for (int c = 0; c < board[r].length; c++){
-        if (board[r][c] != -1){
+        /*if (board[r][c] != -1){
           Board += '_';
           Board += ' ';
         }
         else{
           Board += 'Q';
           Board += ' ';
-        }
+        }*/
+        //testing threat level
+        Board += board[r][c];
+        Board += ' ';
       }
       Board += '\n';
     }
