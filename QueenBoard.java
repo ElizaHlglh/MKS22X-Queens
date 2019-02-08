@@ -1,5 +1,6 @@
 public class QueenBoard{
   private int[][]board;
+  //Queen is -1; empty/safe is 0; not safe location is greater 0 determined by the num of queens threatening it
 
   public QueenBoard(int size){ //constructor
     board = new int[size][size];
@@ -64,6 +65,36 @@ public class QueenBoard{
 
   public boolean addQueen(int r, int c){
     try{
+      if (board[r][c] > 0){ // check if this coordinate is threatened
+        return false;
+      }
+      else{
+        board[r][c] = -1; // add the queen
+        //increasing threats horizontally
+        for (int x = c+1; x < board[r].length; x++){
+          board[r][x] += 1; //increase threat level by 1;
+        }
+
+        //increase threats diagonal (left to right down)
+        int checkX = c+1;
+        int checkY = r+1;
+        while (checkX < board.length && checkY < board.length){
+          board[checkY][checkX] += 1;
+          checkX++;
+          checkY++;
+        }
+
+        //increase threats diagonal (left to right up)
+        checkX = c+1;
+        checkY = r-1;
+        while (checkX < board.length && checkY >= 0){
+          board[checkY][checkX] += 1;
+          checkX++;
+          checkY--;
+        }
+
+        return true;
+      }
 
     }
     catch(IndexOutOfBoundsException e){ //public for testing
@@ -133,6 +164,7 @@ public class QueenBoard{
   *@throws IllegalStateException when the board starts with any non-zero value
   */
   public int countSolutions(){
+    //the total number of combination of solutions(nth queens all on board)
     return 0;
   }
 
