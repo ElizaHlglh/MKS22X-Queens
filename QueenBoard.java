@@ -12,6 +12,30 @@ public class QueenBoard{
 
   public boolean addQueen(int r, int c){ //public for testing
     try{
+      //testing horizontal Queen
+      for (int x = 0; x < board[r].length; x++){
+        if (board[r][x] == 'Q'){
+          return false;
+        }
+      }
+      //no vertical testing since we add according to column (left to right)
+      //testing horizontal (left to right down) Queen
+      int checkX = c;
+      int checkY = r;
+      while (checkX > 0 && checkY > 0){ //find the first top grid for horizontal check
+        checkX--;
+        checkY--;
+      }
+      while (checkX < board.length && checkY < board.length){ //go down horizontally from the top grid
+        if (board[checkY][checkX] == 'Q'){
+          return false;
+        }
+        else{ //move to next horizontal grid
+          checkX++;
+          checkY++;
+        }
+      }
+
       board[r][c] = 'Q' + 0;
       return true;
     }
