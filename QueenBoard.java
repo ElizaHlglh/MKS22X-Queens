@@ -10,17 +10,17 @@ public class QueenBoard{
     }
   }
 
-  private boolean addQueen(int r, int c){
+  public boolean addQueen(int r, int c){ //public for testing
     try{
       board[r][c] = 'Q' + 0;
       return true;
     }
-    catch(IndexOutOfBoundsException e){
+    catch(IndexOutOfBoundsException e){ //public for testing
       return false;
     }
   }
 
-  private boolean removeQueen(int r, int c){
+  public boolean removeQueen(int r, int c){
     try{
       board[r][c] = '_' + 0;
       return true;
