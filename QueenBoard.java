@@ -217,7 +217,7 @@ public class QueenBoard{
       for (int r = 0; r < board.length; r++){ //check is the board is clear/clean
         for (int c = 0; c < board[r].length; c++){
           if (board[r][c] != 0){
-            throw new IllegalStateException("IllegalState board");
+            throw new IllegalStateException();
           }
         }
       }
@@ -234,17 +234,61 @@ public class QueenBoard{
       return false;
     }
     catch(IllegalStateException e){
+      for (int r = 0; r < board.length; r++){ //clear board if not solvable
+        for (int c = 0; c < board[r].length; c++){
+          board[r][c] = 0;
+        }
+      }
       return false;
     }
   }
 
+  public boolean solveRC(int row, int col){
+    if (col >= board.length){
+      return true;
+    }
+    for (int r = 0; r < board.length; r++){//check all rows in each column
+      if (addQueen(r,col)){ //see if the queen can be added to this row
+        if (solveR(col+1)){
+          return true;
+        }
+        else{
+          removeQueen(r,col);
+        }
+      }
+    }
+    return false;
+  }
+
   /**
   *@return the number of solutions found, and leaves the board filled with only 0's
-  *@throws IllegalStateException when the board starts with any non-zero value
+Testing solve() in a new board
+-1 1 1 2 2
+0  *@throws IllegalStateException when the board starts with any non-zero value
   */
   public int countSolutions(){
     //the total number of combination of solutions(nth queens all on board)
-    return 0;
+    int ans = 0;
+    try{
+      for (int r = 0; r < board.length; r++){ //check is the board is clear/clean
+        for (int c = 0; c < board[r].length; c++){
+          if (board[r][c] != 0){
+            throw new IllegalStateException();
+          }
+        }
+      }
+
+
+    }
+
+    catch(IllegalStateException e){
+      for (int r = 0; r < board.length; r++){ //clear board if not solvable
+        for (int c = 0; c < board[r].length; c++){
+          board[r][c] = 0;
+        }
+      }
+      return 0;
+    }
   }
 
 

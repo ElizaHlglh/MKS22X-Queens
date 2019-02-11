@@ -33,5 +33,16 @@ public class driver{
     System.out.println("Testing solve() in a new board");
     board1.solve();
     System.out.println(board1);
+    System.out.println("Testing exception");
+    board1.solve();
+    System.out.println(board1);
+
+    QueenBoard board2 = new QueenBoard(2); //create a 2X2 size board
+    System.out.println(board2);
+    System.out.println("Testing solve() in a new unsolvable board");
+    board2.solve();
+    System.out.println(board2);
+
+
   }
 }
