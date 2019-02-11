@@ -176,7 +176,33 @@ public class QueenBoard{
     return Board;
   }
 
+/*  boolean solveR(int col)
+     if col is past end of board:
+        return true
+     for each row:
+         if addQueen:
+             if solveR(col+1):
+                 return true
+             removeQueen
+     return false
+*/
 
+  public solveR(int col){
+    if (col >= board.length){
+      return true;
+    }
+    for (int r = 0; r < board.length; r++){//check all rows in each column
+      if (addQueen(r,col)){ //see if the queen can be added to this row
+        if (solveR(col+1)){
+          return true;
+        }
+        else{
+          removeQueen(r,col);
+        }
+      }
+    }
+    return false;
+  }
 
   /**
   *@return false when the board is not solveable and leaves the board filled with zeros;
@@ -187,8 +213,18 @@ public class QueenBoard{
 
   */
   public boolean solve(){
-    //use recursion here to add Q using different column for (int x)
-    return true;
+    for (int r = 0; r < board.length; r++){
+      for (int c = 0; c < board[r].length; c++){
+        if (board[r][c] != 0){
+          throw new IllegalStateException("IllegalState");
+        }
+      }
+    }
+
+
+    catch(IllegalStateException e){
+      return false;
+    }
   }
 
   /**
