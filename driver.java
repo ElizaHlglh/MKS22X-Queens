@@ -1,6 +1,6 @@
 public class driver{
   public static void main(String[] args){
-    QueenBoard board = new QueenBoard(8); //create a 3X3 size board
+    QueenBoard board = new QueenBoard(8); //create a 8X8 size board
     System.out.println("printing a 8x8 size board");
     System.out.println(board);
     System.out.println("adding a Q at [0,0], [4,3], [3,2] && [6,4]");
@@ -27,5 +27,11 @@ public class driver{
     board.addQueen(2,1);
     System.out.println(board);
     */
+
+    QueenBoard board1 = new QueenBoard(5); //create a 5X5 size board
+    System.out.println(board1);
+    System.out.println("Testing solve() in a new board");
+    board1.solve();
+    System.out.println(board1);
   }
 }

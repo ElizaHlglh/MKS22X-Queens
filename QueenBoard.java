@@ -187,7 +187,7 @@ public class QueenBoard{
      return false
 */
 
-  public solveR(int col){
+  public boolean solveR(int col){
     if (col >= board.length){
       return true;
     }
@@ -213,15 +213,26 @@ public class QueenBoard{
 
   */
   public boolean solve(){
-    for (int r = 0; r < board.length; r++){
-      for (int c = 0; c < board[r].length; c++){
-        if (board[r][c] != 0){
-          throw new IllegalStateException("IllegalState");
+    try{
+      for (int r = 0; r < board.length; r++){ //check is the board is clear/clean
+        for (int c = 0; c < board[r].length; c++){
+          if (board[r][c] != 0){
+            throw new IllegalStateException("IllegalState board");
+          }
         }
       }
+
+      if (solveR(0)){
+        return true;
+      }
+
+      for (int r = 0; r < board.length; r++){ //clear board if not solvable
+        for (int c = 0; c < board[r].length; c++){
+          board[r][c] = 0;
+        }
+      }
+      return false;
     }
-
-
     catch(IllegalStateException e){
       return false;
     }
