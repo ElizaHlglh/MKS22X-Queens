@@ -104,8 +104,37 @@ public class QueenBoard{
 
   public boolean removeQueen(int r, int c){
     try{
-      board[r][c] = 0;
-      return true;
+      if (board[r][c] != -1){ // check if this coordinate is have a queen
+        return false;
+      }
+      else{
+        board[r][c] = 0; // add the queen
+        //increasing threats horizontally
+        for (int x = c+1; x < board[r].length; x++){
+          board[r][x] -= 1; //decrease threat level by 1;
+        }
+
+        //increase threats diagonal (left to right down)
+        int checkX = c+1;
+        int checkY = r+1;
+        while (checkX < board.length && checkY < board.length){
+          board[checkY][checkX] -= 1;
+          checkX++;
+          checkY++;
+        }
+
+        //increase threats diagonal (left to right up)
+        checkX = c+1;
+        checkY = r-1;
+        while (checkX < board.length && checkY >= 0){
+          board[checkY][checkX] -= 1;
+          checkX++;
+          checkY--;
+        }
+
+        return true;
+      }
+
     }
     catch(IndexOutOfBoundsException e){
       return false;
