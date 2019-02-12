@@ -11,59 +11,7 @@ public class QueenBoard{
     }
   }
 
-/*  public boolean addQueen(int r, int c){ //public for testing
-    try{
-      //testing horizontal Queen
-      for (int x = 0; x < board[r].length; x++){
-        if (board[r][x] == 'Q' + 0){
-          return false;
-        }
-      }
-      //no vertical testing since we add according to column (left to right)
-      //testing horizontal (left to right down) Queen
-      int checkX = c;
-      int checkY = r;
-      while (checkX > 0 && checkY > 0){ //find the first top left grid for horizontal check
-        checkX--;
-        checkY--;
-      }
-      while (checkX < board.length && checkY < board.length){ //go down horizontally from the top grid
-        if (board[checkY][checkX] == 'Q'){
-          return false;
-        }
-        else{ //move to next horizontal grid
-          checkX++;
-          checkY++;
-        }
-      }
-
-      //testing horizontal (right to left down) Queen
-      checkX = c;
-      checkY = r;
-      while (checkX < board.length-1 && checkY > 0){ //find the first top right grid for horizontal check
-        checkX++;
-        checkY--;
-      }
-      while (checkX > 0 && checkY < board.length){ //go down horizontally from the top right grid
-        if (board[checkY][checkX] == 'Q'){
-          return false;
-        }
-        else{ //move to next horizontal grid
-          checkX--;
-          checkY++;
-        }
-      }
-      //only add after passing the testings above
-      board[r][c] = 'Q' + 0;
-      return true;
-    }
-    catch(IndexOutOfBoundsException e){ //public for testing
-      return false;
-    }
-  }
-  */
-
-  public boolean addQueen(int r, int c){
+  private boolean addQueen(int r, int c){
     try{
       if (board[r][c] > 0){ // check if this coordinate is threatened
         return false;
@@ -102,19 +50,19 @@ public class QueenBoard{
     }
   }
 
-  public boolean removeQueen(int r, int c){
+  private boolean removeQueen(int r, int c){
     try{
       if (board[r][c] != -1){ // check if this coordinate is have a queen
         return false;
       }
       else{
-        board[r][c] = 0; // add the queen
-        //increasing threats horizontally
+        board[r][c] = 0; // remove the queen
+        //decreasing threats horizontally
         for (int x = c+1; x < board[r].length; x++){
           board[r][x] -= 1; //decrease threat level by 1;
         }
 
-        //increase threats diagonal (left to right down)
+        //decrease threats diagonal (left to right down)
         int checkX = c+1;
         int checkY = r+1;
         while (checkX < board.length && checkY < board.length){
@@ -123,7 +71,7 @@ public class QueenBoard{
           checkY++;
         }
 
-        //increase threats diagonal (left to right up)
+        //decrease threats diagonal (left to right up)
         checkX = c+1;
         checkY = r-1;
         while (checkX < board.length && checkY >= 0){
@@ -159,33 +107,30 @@ public class QueenBoard{
     String Board = "";
     for (int r = 0; r < board.length; r++){
       for (int c = 0; c < board[r].length; c++){
-        /*if (board[r][c] != -1){
+        if (board[r][c] != -1){
           Board += '_';
           Board += ' ';
         }
         else{
           Board += 'Q';
           Board += ' ';
-        }*/
-        //testing threat level
+        }
+        /*//testing threat level
         Board += board[r][c];
-        Board += ' ';
+        Board += ' ';*/
       }
       Board += '\n';
     }
     return Board;
   }
 
-/*  boolean solveR(int col)
-     if col is past end of board:
-        return true
-     for each row:
-         if addQueen:
-             if solveR(col+1):
-                 return true
-             removeQueen
-     return false
-*/
+  private void clear(){
+    for (int r = 0; r < board.length; r++){
+      for (int c = 0; c < board[r].length; c++){
+        board[r][c] = 0;
+      }
+    }
+  }
 
   public boolean solveR(int col){
     if (col >= board.length){
@@ -226,38 +171,28 @@ public class QueenBoard{
         return true;
       }
 
-      for (int r = 0; r < board.length; r++){ //clear board if not solvable
-        for (int c = 0; c < board[r].length; c++){
-          board[r][c] = 0;
-        }
-      }
+      clear();
       return false;
     }
     catch(IllegalStateException e){
-      for (int r = 0; r < board.length; r++){ //clear board if not solvable
-        for (int c = 0; c < board[r].length; c++){
-          board[r][c] = 0;
-        }
-      }
+      clear();
       return false;
     }
   }
 
-  public boolean solveRC(int row, int col){
+  //solveAll uses solveR
+  public int countAll(int col){
     if (col >= board.length){
-      return true;
+      return 1;
     }
+    int total = 0;
     for (int r = 0; r < board.length; r++){//check all rows in each column
       if (addQueen(r,col)){ //see if the queen can be added to this row
-        if (solveR(col+1)){
-          return true;
-        }
-        else{
-          removeQueen(r,col);
-        }
+        total += countAll(col + 1);
+        removeQueen(r,col);
       }
     }
-    return false;
+    return total;
   }
 
   /**
@@ -278,15 +213,20 @@ Testing solve() in a new board
         }
       }
 
-
-    }
-
-    catch(IllegalStateException e){
-      for (int r = 0; r < board.length; r++){ //clear board if not solvable
-        for (int c = 0; c < board[r].length; c++){
-          board[r][c] = 0;
+      /*for (int row = 0; row < board.length; row++){
+        if (addQueen(row,0) && solveAll(1)){
+          ans++;
+          clear();
         }
+        clear();
       }
+      return ans;
+    }*/
+
+    return countAll(0);
+  }
+    catch(IllegalStateException e){
+      clear();
       return 0;
     }
   }
