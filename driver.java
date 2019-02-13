@@ -8,7 +8,7 @@ public class driver{
     System.out.println("Testing exception");
     board1.solve();
     System.out.println(board1);
-    System.out.println("COunting total solutions");
+    System.out.println("Counting total solutions");
     System.out.println(board1.countSolutions());
 
 
