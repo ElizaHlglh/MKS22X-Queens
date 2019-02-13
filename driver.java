@@ -1,6 +1,6 @@
 public class driver{
   public static void main(String[] args){
-    QueenBoard board1 = new QueenBoard(5); //create a 5X5 size board
+    QueenBoard board1 = new QueenBoard(14); //create a 5X5 size board
     System.out.println(board1);
     System.out.println("Testing solve() in a new board");
     board1.solve();
